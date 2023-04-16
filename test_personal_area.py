@@ -1,59 +1,58 @@
 from selenium.webdriver.common.by import By
-from time import sleep
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium import webdriver
+from selenium.webdriver.support import expected_conditions as EC
 
-class Personal():
-
-    def __init__(self, driver):
-        self.driver = driver
+class TestPersonal():
 
     def test_go_to_personal_account(self):
 
-        self.driver.get('https://stellarburgers.nomoreparties.site/login')
-        self.driver.find_element(By.NAME, 'name').send_keys('tatiana_trachuk_07_124@ya.ru')
-        self.driver.find_element(By.NAME, 'Пароль').send_keys('123456')
-        self.driver.find_element(By.XPATH, 'html/body/div[@id="root"]/div/main/div/form/button').click()
-        sleep(3)
-        self.driver.find_element(By.XPATH, 'html/body/div[@id="root"]/div/header/nav/a').click()
-        sleep(3)
-        assert self.driver.current_url == 'https://stellarburgers.nomoreparties.site/account/profile'
-        self.driver.quit()
+        driver = webdriver.Chrome()
+        driver.get('https://stellarburgers.nomoreparties.site/login')
+        driver.find_element(By.NAME, 'name').send_keys('tatiana_trachuk_07_125@ya.ru')
+        driver.find_element(By.NAME, 'Пароль').send_keys('123456')
+        driver.find_element(By.XPATH, 'html/body/div[@id="root"]/div/main/div/form/button').click()
+        element = WebDriverWait(driver, 3).until(EC.presence_of_element_located((By.XPATH, 'html/body/div[@id="root"]/div/header/nav/a')))
+        element.click()
+        wait = WebDriverWait(driver, 45)
+        wait.until(EC.url_to_be('https://stellarburgers.nomoreparties.site/account/profile'))
+        assert driver.current_url == 'https://stellarburgers.nomoreparties.site/account/profile'
+        driver.quit()
 
     def test_go_to_constructor(self):
 
-        self.driver.get('https://stellarburgers.nomoreparties.site/login')
-        self.driver.find_element(By.NAME, 'name').send_keys('tatiana_trachuk_07_124@ya.ru')
-        self.driver.find_element(By.NAME, 'Пароль').send_keys('123456')
-        self.driver.find_element(By.XPATH, 'html/body/div[@id="root"]/div/main/div/form/button').click()
-        sleep(3)
-        self.driver.find_element(By.XPATH, 'html/body/div[@id="root"]/div/header/nav/a').click()
-        sleep(3)
-        self.driver.find_element(By.XPATH, 'html/body/div[@id="root"]/div/header/nav/ul/li[1]/a').click()
-        assert self.driver.current_url == 'https://stellarburgers.nomoreparties.site/'
-        self.driver.quit()
+        driver = webdriver.Chrome()
+        driver.get('https://stellarburgers.nomoreparties.site/login')
+        driver.find_element(By.NAME, 'name').send_keys('tatiana_trachuk_07_125@ya.ru')
+        driver.find_element(By.NAME, 'Пароль').send_keys('123456')
+        driver.find_element(By.XPATH, 'html/body/div[@id="root"]/div/main/div/form/button').click()
+        driver.find_element(By.XPATH, 'html/body/div[@id="root"]/div/header/nav/a').click()
+        driver.find_element(By.CSS_SELECTOR, 'li:nth-child(1)').click()
+        assert driver.current_url == 'https://stellarburgers.nomoreparties.site/'
+        driver.quit()
 
     def test_go_to_logo(self):
 
-        self.driver.get('https://stellarburgers.nomoreparties.site/login')
-        self.driver.find_element(By.NAME, 'name').send_keys('tatiana_trachuk_07_124@ya.ru')
-        self.driver.find_element(By.NAME, 'Пароль').send_keys('123456')
-        self.driver.find_element(By.XPATH, 'html/body/div[@id="root"]/div/main/div/form/button').click()
-        sleep(3)
-        self.driver.find_element(By.XPATH, 'html/body/div[@id="root"]/div/header/nav/a').click()
-        sleep(3)
-        self.driver.find_element(By.XPATH, 'html/body/div[@id="root"]/div/header/nav/div').click()
-        assert self.driver.current_url == 'https://stellarburgers.nomoreparties.site/'
-        self.driver.quit()
+        driver = webdriver.Chrome()
+        driver.get('https://stellarburgers.nomoreparties.site/login')
+        driver.find_element(By.NAME, 'name').send_keys('tatiana_trachuk_07_125@ya.ru')
+        driver.find_element(By.NAME, 'Пароль').send_keys('123456')
+        driver.find_element(By.XPATH, 'html/body/div[@id="root"]/div/main/div/form/button').click()
+        driver.find_element(By.XPATH, 'html/body/div[@id="root"]/div/header/nav/a').click()
+        driver.find_element(By.XPATH, 'html/body/div[@id="root"]/div/header/nav/div').click()
+        assert driver.current_url == 'https://stellarburgers.nomoreparties.site/'
+        driver.quit()
 
     def test_log_out(self):
-
-        self.driver.get('https://stellarburgers.nomoreparties.site/login')
-        self.driver.find_element(By.NAME, 'name').send_keys('tatiana_trachuk_07_124@ya.ru')
-        self.driver.find_element(By.NAME, 'Пароль').send_keys('123456')
-        self.driver.find_element(By.XPATH, 'html/body/div[@id="root"]/div/main/div/form/button').click()
-        sleep(3)
-        self.driver.find_element(By.XPATH, 'html/body/div[@id="root"]/div/header/nav/a').click()
-        sleep(3)
-        self.driver.find_element(By.XPATH, 'html/body/div[@id="root"]/div/main/div/nav/ul/li[3]/button').click()
-        sleep(3)
-        assert self.driver.current_url == 'https://stellarburgers.nomoreparties.site/login'
-        self.driver.quit()
+        driver = webdriver.Chrome()
+        driver.get('https://stellarburgers.nomoreparties.site/login')
+        driver.find_element(By.NAME, 'name').send_keys('tatiana_trachuk_07_125@ya.ru')
+        driver.find_element(By.NAME, 'Пароль').send_keys('123456')
+        driver.find_element(By.XPATH, 'html/body/div[@id="root"]/div/main/div/form/button').click()
+        WebDriverWait(driver, 7).until(EC.presence_of_element_located((By.XPATH, 'html/body/div[@id="root"]/div/header/nav/a')))
+        driver.find_element(By.XPATH, 'html/body/div[@id="root"]/div/header/nav/a').click()
+        driver.implicitly_wait(10)
+        driver.find_element(By.CSS_SELECTOR, 'li:nth-child(1)').click()
+        driver.implicitly_wait(70)
+        assert driver.current_url == 'https://stellarburgers.nomoreparties.site/login'
+        driver.quit()
